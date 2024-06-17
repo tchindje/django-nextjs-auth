@@ -2,7 +2,6 @@
 
 This is an application built with Next.js and Django to showcase how to build a protected application with authentication features such as registration, login, reset password, and session handling on the front-end. 
 
-You can find an implementation of this application with Redux added. It can be useful for starting a project with Redux Toolkit and Next.js.☺️
 
 ## Stack used
 - Django and DRF for the backend
