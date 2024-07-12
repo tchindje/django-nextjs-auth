@@ -8,6 +8,7 @@ This is an application built with Next.js and Django to showcase how to build a 
 - Next.js and Tailwind on the frontend
 - Wretch for API calls
 - Djoser for authentication
+- postgres database
 
 ## Setup
 
