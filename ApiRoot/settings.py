@@ -35,12 +35,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # installed apps
+
+    # third party apps
     "rest_framework",
     "djoser",
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
-    "user",
+
+    # custom apps
+    "core",
+    "core.user",
 ]
 
 MIDDLEWARE = [
@@ -77,10 +81,21 @@ WSGI_APPLICATION = "ApiRoot.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "coreDb",
+        "USER": "postgres",
+        "PASSWORD": "admin",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -153,5 +168,4 @@ DJOSER = {
     "LOGIN_FIELD": "email"
 }
 
-
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "core_user.User"

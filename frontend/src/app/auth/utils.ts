@@ -10,7 +10,7 @@ const api = wretch("http://localhost:8000").accept("application/json");
  * @param {"access" | "refresh"} type - The type of the token (access or refresh).
  */
 const storeToken = (token: string, type: "access" | "refresh") => {
-  Cookies.set(type + "Token", token);
+    Cookies.set(type + "Token", token);
 };
 
 /**
@@ -19,15 +19,15 @@ const storeToken = (token: string, type: "access" | "refresh") => {
  * @returns {string | undefined} The token, if found.
  */
 const getToken = (type: string) => {
-  return Cookies.get(type + "Token");
+    return Cookies.get(type + "Token");
 };
 
 /**
  * Removes both access and refresh tokens from cookies.
  */
 const removeTokens = () => {
-  Cookies.remove("accessToken");
-  Cookies.remove("refreshToken");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
 };
 
 /**
@@ -38,7 +38,7 @@ const removeTokens = () => {
  * @returns {Promise} A promise that resolves with the registration response.
  */
 const register = (email: string, username: string, password: string) => {
-  return api.post({ email, username, password }, "/auth/users/");
+    return api.post({email, username, password}, "/auth/users/");
 };
 
 /**
@@ -48,7 +48,7 @@ const register = (email: string, username: string, password: string) => {
  * @returns {Promise} A promise that resolves with the login response.
  */
 const login = (email: string, password: string) => {
-  return api.post({ email: email, password }, "/auth/jwt/create");
+    return api.post({email: email, password}, "/auth/jwt/create");
 };
 
 /**
@@ -56,8 +56,8 @@ const login = (email: string, password: string) => {
  * @returns {Promise} A promise that resolves with the login response.
  */
 const logout = () => {
-  const refreshToken = getToken("refresh");
-  return api.post({ refresh: refreshToken }, "/auth/logout/");
+    const refreshToken = getToken("refresh");
+    return api.post({refresh: refreshToken}, "/auth/logout/");
 };
 
 /**
@@ -65,8 +65,8 @@ const logout = () => {
  * @returns {Promise} A promise that resolves with the new access token.
  */
 const handleJWTRefresh = () => {
-  const refreshToken = getToken("refresh");
-  return api.post({ refresh: refreshToken }, "/auth/jwt/refresh");
+    const refreshToken = getToken("refresh");
+    return api.post({refresh: refreshToken}, "/auth/jwt/refresh");
 };
 
 /**
@@ -75,7 +75,7 @@ const handleJWTRefresh = () => {
  * @returns {Promise} A promise that resolves with the password reset response.
  */
 const resetPassword = (email: string) => {
-  return api.post({ email }, "/auth/users/reset_password/");
+    return api.post({email}, "/auth/users/reset_password/");
 };
 
 /**
@@ -87,15 +87,15 @@ const resetPassword = (email: string) => {
  * @returns {Promise} A promise that resolves with the password reset confirmation response.
  */
 const resetPasswordConfirm = (
-  new_password: string,
-  re_new_password: string,
-  token: string,
-  uid: string
+    new_password: string,
+    re_new_password: string,
+    token: string,
+    uid: string
 ) => {
-  return api.post(
-    { uid, token, new_password, re_new_password },
-    "/auth/users/reset_password_confirm/"
-  );
+    return api.post(
+        {uid, token, new_password, re_new_password},
+        "/auth/users/reset_password_confirm/"
+    );
 };
 
 /**
@@ -103,15 +103,15 @@ const resetPasswordConfirm = (
  * @returns {Object} An object containing all the auth actions.
  */
 export const AuthActions = () => {
-  return {
-    login,
-    resetPasswordConfirm,
-    handleJWTRefresh,
-    register,
-    resetPassword,
-    storeToken,
-    getToken,
-    logout,
-    removeTokens,
-  };
+    return {
+        login,
+        resetPasswordConfirm,
+        handleJWTRefresh,
+        register,
+        resetPassword,
+        storeToken,
+        getToken,
+        logout,
+        removeTokens,
+    };
 };

@@ -2,14 +2,12 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 
 
-
 class UserManager(BaseUserManager):
-
     def create_user(self, username, email, password=None, **kwargs):
         """Create and return a `User` with an email, phone number, username and password."""
 
         if username is None:
-            raise TypeError("User must have an username.") 
+            raise TypeError("User must have an username.")
         if email is None:
             raise TypeError('Users must have an email.')
         if password is None:
@@ -18,7 +16,7 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         email = email.lower()
 
-        user = self.model(email=email, username=username,  **kwargs)
+        user = self.model(email=email, username=username, **kwargs)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -52,8 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.email}"
 
-
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}"
-
